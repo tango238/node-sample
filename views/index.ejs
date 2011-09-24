@@ -1,0 +1,90 @@
+<form name="TIMER" onsubmit="return onSubmit();">
+ 残り時間 <input type="text" id="message" name="counterpace" size="10" value="" >
+  <form name="js" onSubmit="return false;">
+Answer:
+<input type="text" name="txtb" value="" onkeydown="if(event.keyCode== 13"){js.btn1.click();}" >
+<input type="button" name="btn1" value="投稿"　onclick="addElement()"><input type="button" value="リセット"　onclick="refresh()"><br>
+</form>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/javascripts/sample.js"></script>
+<script type ="text/javascript">
+    var i=0, n=5;//n
+    var timer1;
+    var counter;
+    var str=new Array;
+    var f1=0, f2=0, f3=0 ,f4=0;
+</script>
+<script type="text/javascript">
+<!--
+
+//タイマーを開始する
+function startfnc()
+{
+   counter=0;
+   timer1=setlnterval("Count()",1000);
+}
+
+//タイマーを変化させる
+function Count(){
+    if(counter !=n){
+        document.TIMER.counterspace.value=("あと"+()n-counter)+"秒");
+            counter++;
+    }
+else{
+    finishfnc();
+    }
+}
+//ゲームを終了させる
+function finishfnc(){
+    clearInterval(timer1);
+    document.TIMER.counterspace.value="GAME OVER";
+    f4=1;
+    document.js.txtb.disabled=true;
+}
+//投稿された言葉を書き込む
+function addElement(){
+    location.reload();
+}
+    str[!]=document.js.txtb.value;
+    var element =document.createElement('div');
+    element.id="id";
+    element.innerHTML=str[i];
+    
+    //f1~f3は、それぞれのチェックの結果、不適切な回答だと１に。
+    f１＝+Ncheck(str[i]);
+    f2 = +kaburiCheck(str[i]);
+
+    if(i>0){
+        f3=+ShiriCheck(str[i},str[i-1]);
+    }
+
+    //f1~f4が全てゼロでない場合、赤背景で書き込み。ゲーム終了
+    if((f1+f2+f3+f4)!=0){
+        element.style.backgroundColor='red';
+        finishnc();
+       objBody=document.getElementsByTagName("body").item(0);
+     objBody.appendChild(element)+
+     }
+
+     //f1-f4が全てゼロの場合、書き込んで次のターンへ
+     else{
+     objBody= document.getElementsByTagName("body").item(0);
+     objBody.appendChild(element);
+     i++;
+     document.js.txtb.value="";
+     document.js.txtb.focus();
+     clearInterval(timer1);
+     document.TIMER.counterspace.value=n;
+     startfnc();
+     }
+}
+
+//前の単語の最後と、入力した単語の頭文字が合ってるかチェック
+function ShiriCheck(a,b){
+    if(a.charAt(0)==b.chatAt(b.length-1)){
+    return 0;
+    }
+    else return 1;
+  }
+  //-->
+  </script>
